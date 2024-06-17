@@ -1,0 +1,83 @@
+"$schema" = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json"
+version = 2
+final_space = true
+console_title_template = '{{ .Shell }} in {{ .Folder }}'
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+
+  [[blocks.segments]]
+    type = "session"
+    style = "plain"
+    background = 'transparent'
+    foreground = "#9ece6a"
+    foreground_templates = [ "{{ if .Root }}#f7768e{{ end }}" ] 
+    template = "{{ if .SSHSession }}{{ .HostName }}{{ end }}  {{ .UserName }}"
+  
+  [[blocks.segments]]
+    type = "path"
+    style = "plain"
+    foreground = "#7aa2f7"
+    background = 'transparent'
+    template = "  {{ .Path }} "
+    
+    [blocks.segments.properties]
+      folder_icon = ""
+      style = "full"
+  
+  [[blocks.segments]]
+    type = 'git'
+    style = 'plain'
+    foreground = "#c0caf5"
+    background = 'transparent'
+    template = "{{ .UpstreamIcon }}{{ .HEAD }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }} "
+    
+    [blocks.segments.properties]
+      fetch_upstream_icon = true
+      fetch_stash_count = true
+      fetch_status = true
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'right'
+  
+  [[blocks.segments]]
+    type = "status"
+    style = 'plain'
+    foreground = "#ff757f"
+    background = 'transparent'
+    template = "{{ if eq .Code 0 }}<#82aaff>0</>{{ else }}<#f7768e></> {{ .Code }}{{ end }}"
+
+  [[blocks.segments]]
+    type = "executiontime"
+    style = "plain"
+    background = 'transparent'
+    foreground = "#c0caf5"
+    template = " <#7dcfff>󱤦</> {{ .FormattedMs }} "
+    
+    [blocks.segments.properties]
+      always_enabled = true
+
+  [[blocks.segments]]
+    type = "time"
+    style = "plain"
+    foreground = "#e0af68"
+    template = " {{ .CurrentDate | date .Format }}"
+  
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+  newline = true
+
+  [[blocks.segments]]
+    type = 'text'
+    style = 'plain'
+    background = 'transparent'
+    foreground = '#a9b1d6'
+    template = "❯"
+
+[transient_prompt]
+  foreground = '#a9b1d6'
+  background = 'transparent'
+  template = "❯"
